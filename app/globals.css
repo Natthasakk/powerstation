@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Brand colors ───────────────── */
+  --color-primary:        #0071E3;
+  --color-primary-strong: #0066CC;
+  --color-green:          #34C759;
+  --color-orange:         #FF9F0A;
+
+  /* ── Dark palette (Tesla-inspired) */
+  --color-canvas:         #000000;
+  --color-surface-dark:   #0d0d0d;
+  --color-surface-dark2:  #161616;
+  --color-surface-light:  #f4f4f4;
+  --color-ink:            #1d1d1f;
+  --color-ink-muted:      #6e6e73;
+  --color-divider:        #e5e7eb;
+  --color-divider-dark:   #2a2a2a;
+
+  /* ── Font stacks ────────────────── */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    -apple-system, BlinkMacSystemFont, "SF Pro Text",    "Helvetica Neue", Arial, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
