@@ -5,17 +5,16 @@
   --color-primary:        #0071E3;
   --color-primary-strong: #0066CC;
   --color-green:          #34C759;
+  --color-dark-green:     #1a432a;
   --color-orange:         #FF9F0A;
 
-  /* ── Dark palette (Tesla-inspired) */
-  --color-canvas:         #000000;
-  --color-surface-dark:   #0d0d0d;
-  --color-surface-dark2:  #161616;
-  --color-surface-light:  #f4f4f4;
+  /* ── Light palette (Studio White) */
+  --color-canvas:         #fbfbfd;
+  --color-surface:        #ffffff;
+  --color-surface-muted:  #f5f5f7;
   --color-ink:            #1d1d1f;
-  --color-ink-muted:      #6e6e73;
-  --color-divider:        #e5e7eb;
-  --color-divider-dark:   #2a2a2a;
+  --color-ink-muted:      #86868b;
+  --color-divider:        #d2d2d7;
 
   /* ── Font stacks ────────────────── */
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
@@ -26,8 +25,8 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background: #000;
-  color: #fff;
+  background: var(--color-canvas);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

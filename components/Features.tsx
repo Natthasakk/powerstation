@@ -1,8 +1,8 @@
 const features = [
   {
-    eyebrow: "Battery Technology",
-    title: "Built to outlast everything.",
-    desc: "LiFePO₄ chemistry delivers 3,500+ cycles — over a decade of daily use — with no thermal runaway risk. The safest portable battery you can own.",
+    eyebrow: "เทคโนโลยีแบตเตอรี่",
+    title: "สร้างมาเพื่อความทนทานเหนือระดับ",
+    desc: "เทคโนโลยี LiFePO₄ มอบรอบการใช้งานกว่า 3,500+ รอบ — นานกว่า 10 ปีสำหรับการใช้งานทุกวัน — ปลอดภัยสูงสุดโดยไม่มีความเสี่ยงจากการลุกไหม้",
     large: true,
     icon: (
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden>
@@ -14,9 +14,9 @@ const features = [
     ),
   },
   {
-    eyebrow: "Solar Ready",
-    title: "Up to 1,600W solar input.",
-    desc: "Every model accepts solar. The Max 4000 can absorb 1,600W simultaneously — fully charged from sunlight in about 2.5 hours on a clear day.",
+    eyebrow: "รองรับโซล่าร์เซลล์",
+    title: "รองรับไฟเข้าสูงสุด 1,600W",
+    desc: "ทุกรุ่นรองรับการชาร์จด้วยโซล่าร์ โดยรุ่น Max 4000 สามารถรับไฟได้ถึง 1,600W พร้อมกัน — ชาร์จเต็มจากแสงแดดในเวลาเพียง 2.5 ชม. ในวันที่ฟ้าใส",
     large: false,
     icon: (
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden>
@@ -26,9 +26,9 @@ const features = [
     ),
   },
   {
-    eyebrow: "X-Stream Charging",
-    title: "0 → 100% in under 2 hrs.",
-    desc: "Proprietary 1,800W–3,000W fast-charge algorithms push each model to full capacity faster than any competitor in its class.",
+    eyebrow: "การชาร์จ X-Stream",
+    title: "0 → 100% ในเวลาไม่ถึง 2 ชม.",
+    desc: "อัลกอริทึมการชาร์จเร็ว 1,800W–3,000W ที่เป็นเอกสิทธิ์เฉพาะ ช่วยให้ชาร์จไฟได้เต็มความจุเร็วกว่าคู่แข่งในระดับเดียวกัน",
     large: false,
     icon: (
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden>
@@ -39,9 +39,9 @@ const features = [
     ),
   },
   {
-    eyebrow: "Smart Display",
-    title: "Real-time power intelligence.",
-    desc: "Every model ships with an LCD that shows live wattage in and out, battery temperature, and a precise countdown to empty or full.",
+    eyebrow: "จอแสดงผลอัจฉริยะ",
+    title: "แสดงข้อมูลพลังงานแบบเรียลไทม์",
+    desc: "ทุกรุ่นมาพร้อมจอ LCD ที่แสดงผลวัตต์เข้า-ออก อุณหภูมิแบตเตอรี่ และการนับเวลาถอยหลังจนกว่าจะเต็มหรือหมดอย่างแม่นยำ",
     large: true,
     icon: (
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden>
@@ -60,70 +60,70 @@ export default function Features() {
     <section id="features" className="bg-white px-6 py-24 md:px-10 md:py-[102px]">
       <div className="mx-auto max-w-[1080px]">
         {/* Header */}
-        <div className="mb-16 max-w-[480px]">
-          <p className="mb-3 font-body text-[13px] uppercase tracking-[0.12em] text-[#6e6e73]">
-            What Sets Them Apart
+        <div className="mb-16 max-w-[540px]">
+          <p className="mb-3 font-body text-[14px] font-bold uppercase tracking-[0.15em] text-[#1a432a]">
+            สิ่งที่ทำให้เราแตกต่าง
           </p>
-          <h2 className="mb-4 font-display text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#1d1d1f] md:text-[48px]">
-            Built for the long haul.
+          <h2 className="mb-4 font-display text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#1d1d1f] md:text-[56px]">
+            สร้างขึ้นเพื่อการใช้งานระยะยาว
           </h2>
-          <p className="font-body text-[17px] leading-[26px] text-[#6e6e73]">
-            Every model shares the same core technology — engineered to perform in extreme conditions and outlast anything else on the market.
+          <p className="font-body text-[19px] leading-[28px] text-[#86868b]">
+            ทุกโมเดลใช้เทคโนโลยีหลักเดียวกัน — ออกแบบมาให้ทำงานในสภาวะสุดขั้วและมีอายุการใช้งานนานกว่าที่เคยมีมา
           </p>
         </div>
 
         {/* Bento grid */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
           {/* Row 1: large (7 col) + small (5 col) */}
-          <div className="flex flex-col rounded-2xl bg-[#f4f4f4] p-8 md:col-span-7">
-            <div className="mb-5">{features[0].icon}</div>
-            <p className="mb-2 font-body text-[12px] uppercase tracking-[0.1em] text-[#9e9ea0]">
+          <div className="group flex flex-col rounded-3xl bg-[#f5f5f7] p-10 transition-all duration-300 hover:shadow-xl md:col-span-7">
+            <div className="mb-8 scale-110 origin-left">{features[0].icon}</div>
+            <p className="mb-2 font-body text-[12px] font-bold uppercase tracking-[0.1em] text-[#1a432a]">
               {features[0].eyebrow}
             </p>
-            <h3 className="mb-3 font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
+            <h3 className="mb-4 font-display text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
               {features[0].title}
             </h3>
-            <p className="font-body text-[15px] leading-[22px] text-[#6e6e73]">
+            <p className="font-body text-[16px] leading-relaxed text-[#86868b]">
               {features[0].desc}
             </p>
           </div>
 
-          <div className="flex flex-col rounded-2xl bg-[#f4f4f4] p-8 md:col-span-5">
-            <div className="mb-5">{features[1].icon}</div>
-            <p className="mb-2 font-body text-[12px] uppercase tracking-[0.1em] text-[#9e9ea0]">
+          <div className="group flex flex-col rounded-3xl bg-[#f5f5f7] p-10 transition-all duration-300 hover:shadow-xl md:col-span-5">
+            <div className="mb-8 scale-110 origin-left">{features[1].icon}</div>
+            <p className="mb-2 font-body text-[12px] font-bold uppercase tracking-[0.1em] text-[#1a432a]">
               {features[1].eyebrow}
             </p>
-            <h3 className="mb-3 font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
+            <h3 className="mb-4 font-display text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
               {features[1].title}
             </h3>
-            <p className="font-body text-[15px] leading-[22px] text-[#6e6e73]">
+            <p className="font-body text-[16px] leading-relaxed text-[#86868b]">
               {features[1].desc}
             </p>
           </div>
 
           {/* Row 2: small (5 col) + large (7 col) */}
-          <div className="flex flex-col rounded-2xl bg-[#f4f4f4] p-8 md:col-span-5">
-            <div className="mb-5">{features[2].icon}</div>
-            <p className="mb-2 font-body text-[12px] uppercase tracking-[0.1em] text-[#9e9ea0]">
+          <div className="group flex flex-col rounded-3xl bg-[#f5f5f7] p-10 transition-all duration-300 hover:shadow-xl md:col-span-5">
+            <div className="mb-8 scale-110 origin-left">{features[2].icon}</div>
+            <p className="mb-2 font-body text-[12px] font-bold uppercase tracking-[0.1em] text-[#1a432a]">
               {features[2].eyebrow}
             </p>
-            <h3 className="mb-3 font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
+            <h3 className="mb-4 font-display text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
               {features[2].title}
             </h3>
-            <p className="font-body text-[15px] leading-[22px] text-[#6e6e73]">
+            <p className="font-body text-[16px] leading-relaxed text-[#86868b]">
               {features[2].desc}
             </p>
           </div>
 
-          <div className="flex flex-col rounded-2xl bg-[#f4f4f4] p-8 md:col-span-7">
-            <div className="mb-5">{features[3].icon}</div>
-            <p className="mb-2 font-body text-[12px] uppercase tracking-[0.1em] text-[#9e9ea0]">
+          <div className="group flex flex-col rounded-3xl bg-[#f5f5f7] p-10 transition-all duration-300 hover:shadow-xl md:col-span-7">
+            <div className="mb-8 scale-110 origin-left">{features[3].icon}</div>
+            <p className="mb-2 font-body text-[12px] font-bold uppercase tracking-[0.1em] text-[#1a432a]">
               {features[3].eyebrow}
             </p>
-            <h3 className="mb-3 font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
+            <h3 className="mb-4 font-display text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-[#1d1d1f]">
               {features[3].title}
             </h3>
-            <p className="font-body text-[15px] leading-[22px] text-[#6e6e73]">
+            <p className="font-body text-[16px] leading-relaxed text-[#86868b]">
               {features[3].desc}
             </p>
           </div>

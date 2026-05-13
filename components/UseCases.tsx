@@ -1,9 +1,9 @@
 const cases = [
   {
-    title: "Outdoor & Camping",
+    title: "กิจกรรมกลางแจ้งและแคมป์ปิ้ง",
     sub: "Lite 1000",
-    desc: "Run a camp fridge 30+ hrs, charge all gear, power lights and fans. No generator, no noise.",
-    bg: "#0a1628",
+    desc: "ใช้งานตู้เย็นแช่แข็งสำหรับแคมป์ได้นานกว่า 30 ชม., ชาร์จอุปกรณ์ทั้งหมด, จ่ายไฟให้แสงสว่างและพัดลม ไร้เสียงรบกวน",
+    bg: "#f5fbf6",
     accent: "#34C759",
     icon: (
       <svg width="120" height="120" viewBox="0 0 140 140" fill="none" aria-hidden>
@@ -20,10 +20,10 @@ const cases = [
     ),
   },
   {
-    title: "Home Backup",
+    title: "สำรองไฟภายในบ้าน",
     sub: "Pro 2000",
-    desc: "Keep fridge, lights, router and medical devices running for up to 24 hrs during any outage.",
-    bg: "#0a0f1f",
+    desc: "ช่วยให้ตู้เย็น, แสงสว่าง, เราเตอร์ และอุปกรณ์ทางการแพทย์ทำงานได้ต่อเนื่องสูงสุด 24 ชม. เมื่อไฟดับ",
+    bg: "#f5f8ff",
     accent: "#0071E3",
     icon: (
       <svg width="120" height="120" viewBox="0 0 140 140" fill="none" aria-hidden>
@@ -36,10 +36,10 @@ const cases = [
     ),
   },
   {
-    title: "Work Sites",
+    title: "ไซต์งานก่อสร้าง",
     sub: "Max 4000",
-    desc: "Power tools, compressors, and lighting rigs all day at 4,000W continuous. Zero emissions on site.",
-    bg: "#1a0e00",
+    desc: "จ่ายไฟให้เครื่องมือช่าง, คอมเพรสเซอร์ และชุดไฟส่องสว่างได้ตลอดวันด้วยกำลังขับ 4,000W ต่อเนื่อง ไร้มลพิษ",
+    bg: "#fff9f0",
     accent: "#FF9F0A",
     icon: (
       <svg width="120" height="120" viewBox="0 0 140 140" fill="none" aria-hidden>
@@ -53,10 +53,10 @@ const cases = [
     ),
   },
   {
-    title: "Van Life & RV",
-    sub: "Any Model",
-    desc: "Silent, odorless hub for your rolling home. Pair with roof solar for completely self-sufficient living.",
-    bg: "#021409",
+    title: "ชีวิตบนรถตู้และ RV",
+    sub: "ใช้ได้ทุกรุ่น",
+    desc: "ศูนย์กลางพลังงานที่เงียบและไร้กลิ่นสำหรับบ้านเคลื่อนที่ของคุณ จับคู่กับแผงโซล่าร์บนหลังคาเพื่อการใช้ชีวิตที่พึ่งพาตนเองได้อย่างสมบูรณ์",
+    bg: "#f5fdf7",
     accent: "#34C759",
     icon: (
       <svg width="120" height="120" viewBox="0 0 140 140" fill="none" aria-hidden>
@@ -77,52 +77,52 @@ const cases = [
 
 export default function UseCases() {
   return (
-    <section id="usecases" className="bg-black px-6 py-24 md:px-10 md:py-[102px]">
+    <section id="usecases" className="bg-[#fbfbfd] px-6 py-24 md:px-10 md:py-[102px]">
       <div className="mx-auto max-w-[1080px]">
         {/* Header */}
         <div className="mb-14 text-center">
-          <p className="mb-3 font-body text-[13px] uppercase tracking-[0.12em] text-white/40">
-            Use Cases
+          <p className="mb-3 font-body text-[14px] font-bold uppercase tracking-[0.15em] text-[#1a432a]">
+            การใช้งาน
           </p>
-          <h2 className="mb-4 font-display text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-white md:text-[48px]">
-            Power where you need it.
+          <h2 className="mb-4 font-display text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#1d1d1f] md:text-[56px]">
+            พลังงานที่คุณต้องการ ในทุกที่
           </h2>
-          <p className="mx-auto max-w-[420px] font-body text-[17px] leading-[26px] text-white/50">
-            There&apos;s a VoltCore for every scenario — from weekend adventures to professional work sites.
+          <p className="mx-auto max-w-[480px] font-body text-[19px] leading-[28px] text-[#86868b]">
+            VoltCore มีรุ่นที่ตอบโจทย์ทุกสถานการณ์ — ตั้งแต่การผจญภัยในวันหยุดไปจนถึงไซต์งานระดับมืออาชีพ
           </p>
         </div>
 
         {/* 2×2 grid */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {cases.map((c) => (
             <div
               key={c.title}
-              className="group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-transform duration-300 hover:-translate-y-1"
+              className="group relative flex flex-col overflow-hidden rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               style={{ background: c.bg }}
             >
               {/* Subtle inner glow */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-2xl"
+                className="pointer-events-none absolute inset-0 rounded-3xl"
                 style={{
-                  background: `radial-gradient(ellipse 60% 40% at 50% 0%, ${c.accent}18 0%, transparent 70%)`,
+                  background: `radial-gradient(circle at 50% 0%, ${c.accent}10 0%, transparent 70%)`,
                 }}
               />
               {/* Top accent line */}
-              <div className="absolute left-0 top-0 h-[2px] w-full rounded-t-2xl" style={{ background: c.accent }} />
+              <div className="absolute left-0 top-0 h-[3px] w-full rounded-t-3xl" style={{ background: c.accent }} />
 
               <div className="relative z-10 flex flex-1 flex-col">
-                <div className="mb-6">{c.icon}</div>
+                <div className="mb-8">{c.icon}</div>
                 <div
-                  className="mb-1 font-body text-[11px] font-semibold uppercase tracking-[0.1em]"
+                  className="mb-1 font-body text-[12px] font-bold uppercase tracking-[0.1em]"
                   style={{ color: c.accent }}
                 >
                   {c.sub}
                 </div>
-                <h3 className="mb-2 font-display text-[22px] font-semibold text-white">
+                <h3 className="mb-3 font-display text-[26px] font-bold text-[#1d1d1f]">
                   {c.title}
                 </h3>
-                <p className="font-body text-[14px] leading-[21px] text-white/55">
+                <p className="font-body text-[16px] leading-[24px] text-[#86868b]">
                   {c.desc}
                 </p>
               </div>
