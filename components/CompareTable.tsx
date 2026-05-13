@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ProductModel, initialModels } from "@/app/data";
 import { safeJsonParse } from "@/app/lib/safety";
 
@@ -7,12 +8,14 @@ export default function CompareTable() {
   const [models, setModels] = useState<ProductModel[]>(initialModels);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("voltcore_models");
-      const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
-      if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
-    } catch {
-      // localStorage unavailable — keep initialModels
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("voltcore_models");
+        const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
+        if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
+      } catch {
+        // localStorage unavailable — keep initialModels
+      }
     }
   }, []);
 
@@ -115,21 +118,21 @@ export default function CompareTable() {
                     }}
                   >
                     {m.featured ? (
-                      <a
+                      <Link
                         href={`/product/${m.id}`}
                         className="inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-full font-body text-[14px] font-bold text-white no-underline transition-all hover:opacity-90 shadow-lg"
                         style={{ background: m.accent, boxShadow: `0 8px 24px ${m.accent}40` }}
                       >
                         ดูรายละเอียด
-                      </a>
+                      </Link>
                     ) : (
-                      <a
+                      <Link
                         href={`/product/${m.id}`}
                         className="inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-full border-2 font-body text-[14px] font-bold no-underline transition-all hover:bg-black hover:text-white hover:border-black"
                         style={{ borderColor: m.accent, color: m.accent }}
                       >
                         ดูรายละเอียด
-                      </a>
+                      </Link>
                     )}
                   </td>
                 ))}

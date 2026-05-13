@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ProductModel, initialModels } from "@/app/data";
 import { safeJsonParse, safeImageSrc } from "@/app/lib/safety";
 
@@ -7,12 +8,14 @@ export default function ModelCards() {
   const [models, setModels] = useState<ProductModel[]>(initialModels);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("voltcore_models");
-      const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
-      if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
-    } catch {
-      // localStorage unavailable — keep initialModels
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("voltcore_models");
+        const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
+        if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
+      } catch {
+        // localStorage unavailable — keep initialModels
+      }
     }
   }, []);
 
@@ -77,7 +80,7 @@ export default function ModelCards() {
               {/* Content */}
               <div className="flex flex-1 flex-col px-7 pb-8 pt-6">
                 <h3 className="mb-1 font-display text-[22px] font-bold text-[#1d1d1f]">
-                  <a href={`/product/${m.id}`} className="hover:underline">{m.name}</a>
+                  <Link href={`/product/${m.id}`} className="hover:underline">{m.name}</Link>
                 </h3>
                 <p className="mb-6 font-body text-[15px] leading-relaxed text-[#86868b]">
                   {m.tagline}
@@ -103,13 +106,13 @@ export default function ModelCards() {
 
                 {/* CTAs */}
                 <div className="mt-auto space-y-3">
-                  <a
+                  <Link
                     href={`/product/${m.id}`}
                     className="inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-full font-body text-[15px] font-semibold text-white no-underline transition-all hover:opacity-90"
                     style={{ background: m.accent }}
                   >
                     ดูรายละเอียด {m.name.replace("VoltCore ", "")}
-                  </a>
+                  </Link>
                   <div className="grid grid-cols-2 gap-2">
                     <a
                       href="#"

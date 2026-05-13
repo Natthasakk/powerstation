@@ -13,12 +13,14 @@ export default function Hero() {
   const [heroImage, setHeroImage] = useState<string>("");
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("voltcore_hero_image");
-      const safe = safeImageSrc(saved);
-      if (safe) setHeroImage(safe);
-    } catch {
-      // localStorage unavailable — use default background
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("voltcore_hero_image");
+        const safe = safeImageSrc(saved);
+        if (safe) setHeroImage(safe);
+      } catch {
+        // localStorage unavailable — use default background
+      }
     }
   }, []);
 

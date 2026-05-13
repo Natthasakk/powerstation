@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const links = [
   { href: "#models",   label: "รุ่นสินค้า" },
@@ -29,12 +30,12 @@ export default function Nav() {
       >
         <div className="mx-auto flex h-[64px] max-w-[1280px] items-center justify-between px-6 md:px-10">
           {/* Logo */}
-          <a
+          <Link
             href="/"
             className="font-display text-[22px] font-bold tracking-[-0.01em] text-[#1a432a] no-underline"
           >
             VoltCore
-          </a>
+          </Link>
 
           {/* Links (Desktop) */}
           <ul className="hidden items-center gap-10 md:flex" role="list">

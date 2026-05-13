@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ProductModel, initialModels, ModelSpec, SeoData } from "@/app/data";
 import { safeJsonParse, safeImageSrc, isSafeImageUrl, validateImageFile } from "@/app/lib/safety";
 
@@ -7,8 +8,11 @@ type AdminSection = "products" | "hero";
 type FormTab = "info" | "gallery" | "specs" | "seo";
 
 export default function AdminPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [section, setSection] = useState<AdminSection>("products");
-  const [models, setModels] = useState<ProductModel[]>([]);
+  const [models, setModels] = useState<ProductModel[]>(initialModels);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState<Partial<ProductModel>>({});
@@ -25,20 +29,42 @@ export default function AdminPage() {
   const [heroError, setHeroError] = useState<string>("");
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("voltcore_models");
-      const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
-      setModels(Array.isArray(parsed) && parsed.length > 0 ? parsed : initialModels);
-      const savedHero = localStorage.getItem("voltcore_hero_image");
-      const safeHero = safeImageSrc(savedHero);
-      if (safeHero) {
-        setHeroImage(safeHero);
-        setHeroImageInput(safeHero.startsWith("data:") ? "" : safeHero);
+    if (typeof window !== "undefined") {
+      try {
+        const session = sessionStorage.getItem("voltcore_admin_session");
+        if (session === "true") setIsLoggedIn(true);
+
+        const saved = localStorage.getItem("voltcore_models");
+        const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
+        if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
+
+        const savedHero = localStorage.getItem("voltcore_hero_image");
+        const safeHero = safeImageSrc(savedHero);
+        if (safeHero) {
+          setHeroImage(safeHero);
+          setHeroImageInput(safeHero.startsWith("data:") ? "" : safeHero);
+        }
+      } catch (e) {
+        console.error("Initialization error", e);
       }
-    } catch {
-      setModels(initialModels);
     }
   }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === "Rexasia12345") {
+      setIsLoggedIn(true);
+      sessionStorage.setItem("voltcore_admin_session", "true");
+      setLoginError("");
+    } else {
+      setLoginError("รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    sessionStorage.removeItem("voltcore_admin_session");
+  };
 
   const saveToLocal = (newModels: ProductModel[]) => {
     localStorage.setItem("voltcore_models", JSON.stringify(newModels));
@@ -236,6 +262,54 @@ export default function AdminPage() {
     { id: "seo", label: "SEO" },
   ];
 
+  if (!isLoggedIn) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#f5f5f7] p-6">
+        <div className="w-full max-w-[400px] overflow-hidden rounded-[32px] border border-gray-200/50 bg-white p-10 shadow-2xl shadow-black/5 backdrop-blur-xl">
+          <div className="mb-10 text-center">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#1a432a] text-[24px] font-black text-white shadow-lg shadow-[#1a432a]/20">
+              V
+            </div>
+            <h1 className="text-[24px] font-bold tracking-tight text-[#1d1d1f]">ยินดีต้อนรับกลับ</h1>
+            <p className="mt-2 text-[14px] font-medium text-[#86868b]">กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบ</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[11px] font-bold uppercase tracking-widest text-[#86868b]">รหัสผ่าน</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={inputCls}
+                placeholder="••••••••"
+                required
+                autoFocus
+              />
+              {loginError && <p className="text-[12px] font-semibold text-red-500">{loginError}</p>}
+            </div>
+
+            <button
+              type="submit"
+              className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-[#1a432a] py-4 text-[15px] font-bold text-white transition-all hover:bg-[#1a432a]/95 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              เข้าสู่ระบบ
+              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </form>
+
+          <div className="mt-10 border-t border-gray-100 pt-8 text-center">
+            <Link href="/" className="text-[13px] font-semibold text-[#86868b] transition-colors hover:text-[#1a432a]">
+              กลับสู่หน้าหลัก
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
 
@@ -285,8 +359,8 @@ export default function AdminPage() {
         </nav>
 
         {/* Footer */}
-        <div className="border-t border-gray-100 p-4">
-          <a
+        <div className="border-t border-gray-100 p-4 space-y-1">
+          <Link
             href="/"
             className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-[13px] font-semibold text-[#86868b] transition-colors hover:bg-gray-100 hover:text-[#1d1d1f]"
           >
@@ -294,7 +368,16 @@ export default function AdminPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             กลับสู่หน้าหลัก
-          </a>
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-[13px] font-semibold text-red-500 transition-colors hover:bg-red-50 hover:text-red-600"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            ออกจากระบบ
+          </button>
         </div>
       </aside>
 

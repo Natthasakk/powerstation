@@ -83,7 +83,7 @@ export default function ProductPage() {
   const ctaZoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (typeof window === "undefined" || !id) return;
     let models: ProductModel[] = initialModels;
     try {
       const saved = localStorage.getItem("voltcore_models");
@@ -91,8 +91,12 @@ export default function ProductPage() {
       if (Array.isArray(parsed) && parsed.length > 0) models = parsed;
     } catch { /* localStorage unavailable */ }
     const found = models.find((m) => m.id === id);
-    if (found) { setProduct(found); setSelectedImageIdx(0); }
-    else setNotFoundFlag(true);
+    if (found) {
+      setProduct(found);
+      setSelectedImageIdx(0);
+    } else {
+      setNotFoundFlag(true);
+    }
   }, [id]);
 
   useEffect(() => {
