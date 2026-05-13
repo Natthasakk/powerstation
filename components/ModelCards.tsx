@@ -105,9 +105,10 @@ export default function ModelCards() {
                 <div className="mt-auto space-y-3">
                   <a
                     href={`/product/${m.id}`}
-                    className="inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-full bg-black font-body text-[15px] font-semibold text-white no-underline transition-all hover:bg-gray-800"
+                    className="inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-full font-body text-[15px] font-semibold text-white no-underline transition-all hover:opacity-90"
+                    style={{ background: m.accent }}
                   >
-                    เพิ่มเติม
+                    ดูรายละเอียด {m.name.replace("VoltCore ", "")}
                   </a>
                   <div className="grid grid-cols-2 gap-2">
                     <a
