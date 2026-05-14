@@ -6,9 +6,9 @@ const columns = [
   {
     title: "สินค้า",
     links: [
-      { label: "VoltCore Lite 1000", href: "/product/lite-1000" },
-      { label: "VoltCore Pro 2000", href: "/product/pro-2000" },
-      { label: "VoltCore Max 4000", href: "/product/max-4000" },
+      { label: "VoltCore Lite 1000", href: "/product/PB-AR07Pro" },
+      { label: "VoltCore Pro 2000", href: "/product/PB-AR20Pro" },
+      { label: "VoltCore Max 4000", href: "/product/PB-AR26Pro" },
       { label: "แผงโซล่าร์เซลล์", href: "#" },
       { label: "อุปกรณ์เสริม", href: "#" },
     ],

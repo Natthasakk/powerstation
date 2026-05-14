@@ -64,9 +64,9 @@ const keyFeatures = [
 ];
 
 const socialProofByModel: Record<string, string> = {
-  "lite-1000": "ขายไปแล้วกว่า 320 เครื่อง",
-  "pro-2000":  "ขายไปแล้วกว่า 800 เครื่อง",
-  "max-4000":  "ขายไปแล้วกว่า 150 เครื่อง",
+  "PB-AR07Pro": "ขายไปแล้วกว่า 320 เครื่อง",
+  "PB-AR20Pro": "ขายไปแล้วกว่า 800 เครื่อง",
+  "PB-AR26Pro": "ขายไปแล้วกว่า 150 เครื่อง",
 };
 
 interface ProductClientProps {
