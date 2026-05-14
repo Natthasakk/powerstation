@@ -35,15 +35,18 @@ export default function AdminPage() {
         if (session === "true") setIsLoggedIn(true);
 
         const saved = localStorage.getItem("voltcore_models");
+        console.log("Loading models from localStorage:", saved ? "Found data" : "No data");
+        
         const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
-        if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          console.log("Parsed models:", parsed.length, "items");
+          setModels(parsed);
+        } else if (saved) {
+          console.warn("localStorage data found but failed to parse or was empty");
+        }
 
         const savedHero = localStorage.getItem("voltcore_hero_image");
-        const safeHero = safeImageSrc(savedHero);
-        if (safeHero) {
-          setHeroImage(safeHero);
-          setHeroImageInput(safeHero.startsWith("data:") ? "" : safeHero);
-        }
+        if (savedHero) setHeroImage(savedHero);
       } catch (e) {
         console.error("Initialization error", e);
       }
@@ -67,8 +70,15 @@ export default function AdminPage() {
   };
 
   const saveToLocal = (newModels: ProductModel[]) => {
-    localStorage.setItem("voltcore_models", JSON.stringify(newModels));
-    setModels(newModels);
+    try {
+      localStorage.setItem("voltcore_models", JSON.stringify(newModels));
+      setModels(newModels);
+      return true;
+    } catch (e) {
+      console.error("Failed to save to localStorage:", e);
+      alert("ไม่สามารถบันทึกข้อมูลลงในเครื่องได้ เนื่องจากข้อมูลมีขนาดใหญ่เกินไป (เช่น มีรูปภาพฐาน Base64 มากเกินไป) กรุณาใช้ URL รูปภาพแทนการอัพโหลดไฟล์");
+      return false;
+    }
   };
 
   const openEditor = (m: ProductModel) => {
@@ -407,17 +417,73 @@ export default function AdminPage() {
               </p>
             </div>
           </div>
-          {section === "products" && !showForm && (
-            <button
-              onClick={openNewForm}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#1a432a] px-5 py-2 text-[13px] font-bold text-white shadow-sm transition-all hover:bg-[#1a432a]/90 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
-              </svg>
-              เพิ่มสินค้าใหม่
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {section === "products" && !showForm && (
+              <>
+                <button
+                  onClick={() => {
+                    const data = JSON.stringify({ models, heroImage }, null, 2);
+                    const blob = new Blob([data], { type: "application/json" });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `voltcore-data-${new Date().toISOString().split('T')[0]}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                  }}
+                  className="hidden items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-[13px] font-bold text-gray-600 transition-all hover:bg-gray-50 sm:inline-flex"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  </svg>
+                  ส่งออก (Export)
+                </button>
+                <label className="hidden cursor-pointer items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-[13px] font-bold text-gray-600 transition-all hover:bg-gray-50 sm:inline-flex">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  นำเข้า (Import)
+                  <input
+                    type="file"
+                    accept=".json"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      const reader = new FileReader();
+                      reader.onload = (re) => {
+                        try {
+                          const content = re.target?.result as string;
+                          const data = JSON.parse(content);
+                          if (data.models) {
+                            saveToLocal(data.models);
+                            if (data.heroImage) {
+                              localStorage.setItem("voltcore_hero_image", data.heroImage);
+                              setHeroImage(data.heroImage);
+                            }
+                            alert("นำเข้าข้อมูลสำเร็จแล้ว!");
+                            window.location.reload();
+                          }
+                        } catch (err) {
+                          alert("ไฟล์ไม่ถูกต้อง กรุณาใช้ไฟล์ .json ที่ส่งออกมาจากระบบนี้เท่านั้น");
+                        }
+                      };
+                      reader.readAsText(file);
+                    }}
+                  />
+                </label>
+                <button
+                  onClick={openNewForm}
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#1a432a] px-5 py-2 text-[13px] font-bold text-white shadow-sm transition-all hover:bg-[#1a432a]/90 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                  </svg>
+                  เพิ่มสินค้าใหม่
+                </button>
+              </>
+            )}
+          </div>
         </header>
 
         {/* ── Page content ── */}
@@ -625,6 +691,20 @@ export default function AdminPage() {
                                 className={inputCls}
                               />
                             </Field>
+                            <Field label="URL รูปภาพหลัก">
+                              <input
+                                value={formData.imageUrl || ""}
+                                onChange={(e) => {
+                                  const url = e.target.value;
+                                  const images = [...(formData.images || [])];
+                                  if (images.length === 0) images.push(url);
+                                  else images[0] = url;
+                                  setFormData({ ...formData, imageUrl: url, images });
+                                }}
+                                placeholder="https://..."
+                                className={inputCls}
+                              />
+                            </Field>
                             <Field label="สีแบรนด์ (Accent)">
                               <div className="flex items-center gap-3">
                                 <input
@@ -638,6 +718,41 @@ export default function AdminPage() {
                                   onChange={(e) => setFormData({ ...formData, accent: e.target.value })}
                                   placeholder="#0071E3"
                                   className={`${inputCls} flex-1 font-mono`}
+                                />
+                              </div>
+                            </Field>
+                          </div>
+
+                          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                            <Field label="ลิงก์ Shopee">
+                              <div className="flex items-center gap-3">
+                                <span className="flex h-[52px] w-10 flex-shrink-0 items-center justify-center rounded-xl border border-gray-200 bg-[#EE4D2D]/10 text-[#EE4D2D]">
+                                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a7 7 0 110 14A7 7 0 0112 5zm-1.5 3.5v1h-1a.5.5 0 000 1h1v5h1v-5h1a.5.5 0 000-1h-1v-1a.5.5 0 00-1 0z"/>
+                                  </svg>
+                                </span>
+                                <input
+                                  type="url"
+                                  value={formData.shopeeUrl || ""}
+                                  onChange={(e) => setFormData({ ...formData, shopeeUrl: e.target.value })}
+                                  placeholder="https://shopee.co.th/..."
+                                  className={`${inputCls} flex-1`}
+                                />
+                              </div>
+                            </Field>
+                            <Field label="ลิงก์ LINE">
+                              <div className="flex items-center gap-3">
+                                <span className="flex h-[52px] w-10 flex-shrink-0 items-center justify-center rounded-xl border border-gray-200 bg-[#06C755]/10 text-[#06C755]">
+                                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 8.5c0-2.485-2.015-4.5-4.5-4.5S7.5 8.015 7.5 10.5c0 2.224 1.56 4.08 3.664 4.436-.145.497-.475 1.553-.545 1.794-.085.298.11.294.228.213.094-.065 1.497-.988 2.104-1.393.18.025.363.038.549.038 2.485 0 4.5-2.015 4.5-4.5z"/>
+                                  </svg>
+                                </span>
+                                <input
+                                  type="url"
+                                  value={formData.lineUrl || ""}
+                                  onChange={(e) => setFormData({ ...formData, lineUrl: e.target.value })}
+                                  placeholder="https://line.me/ti/p/@..."
+                                  className={`${inputCls} flex-1`}
                                 />
                               </div>
                             </Field>

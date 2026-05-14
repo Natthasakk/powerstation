@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ProductModel, initialModels } from "@/app/data";
+import { ProductModel, initialModels, socialLinks } from "@/app/data";
 import { safeJsonParse, safeImageSrc } from "@/app/lib/safety";
 
 export default function ModelCards() {
   const [models, setModels] = useState<ProductModel[]>(initialModels);
+  const [lineUrl, setLineUrl] = useState(socialLinks.line);
+  const [shopeeUrl, setShopeeUrl] = useState(socialLinks.shopee);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -13,6 +15,10 @@ export default function ModelCards() {
         const saved = localStorage.getItem("voltcore_models");
         const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
         if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
+        const savedLine = localStorage.getItem("voltcore_line_url");
+        if (savedLine) setLineUrl(savedLine);
+        const savedShopee = localStorage.getItem("voltcore_shopee_url");
+        if (savedShopee) setShopeeUrl(savedShopee);
       } catch {
         // localStorage unavailable — keep initialModels
       }
@@ -115,7 +121,8 @@ export default function ModelCards() {
                   </Link>
                   <div className="grid grid-cols-2 gap-2">
                     <a
-                      href="#"
+                      href={m.shopeeUrl || shopeeUrl}
+                      target="_blank"
                       rel="noopener noreferrer nofollow"
                       aria-label={`ซื้อ ${m.name} บน Shopee`}
                       className="inline-flex h-10 items-center justify-center rounded-full bg-[#ee4d2d] font-body text-[13px] font-semibold text-white no-underline transition-opacity hover:opacity-90"
@@ -123,7 +130,8 @@ export default function ModelCards() {
                       Shopee
                     </a>
                     <a
-                      href="#"
+                      href={m.lineUrl || lineUrl}
+                      target="_blank"
                       rel="noopener noreferrer nofollow"
                       aria-label={`สอบถาม ${m.name} ผ่าน LINE`}
                       className="inline-flex h-10 items-center justify-center rounded-full bg-[#06C755] font-body text-[13px] font-semibold text-white no-underline transition-opacity hover:opacity-90"
@@ -140,4 +148,5 @@ export default function ModelCards() {
     </section>
   );
 }
+
 

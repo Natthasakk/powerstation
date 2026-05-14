@@ -1,4 +1,25 @@
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { socialLinks } from "@/app/data";
+
 export default function CTABand() {
+  const [lineUrl, setLineUrl] = useState(socialLinks.line);
+  const [shopeeUrl, setShopeeUrl] = useState(socialLinks.shopee);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedLine = localStorage.getItem("voltcore_line_url");
+        if (savedLine) setLineUrl(savedLine);
+        const savedShopee = localStorage.getItem("voltcore_shopee_url");
+        if (savedShopee) setShopeeUrl(savedShopee);
+      } catch {
+        // localStorage unavailable
+      }
+    }
+  }, []);
+
   return (
     <section
       id="cta"
@@ -27,17 +48,27 @@ export default function CTABand() {
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a
-            href="#models"
+            href={lineUrl}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="inline-flex h-12 cursor-pointer items-center rounded-full bg-[#06C755] px-10 font-body text-[16px] font-semibold text-white no-underline transition-all hover:scale-105 active:scale-95"
+          >
+            คุยทาง LINE
+          </a>
+          <a
+            href={shopeeUrl}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="inline-flex h-12 cursor-pointer items-center rounded-full bg-[#ee4d2d] px-10 font-body text-[16px] font-semibold text-white no-underline transition-all hover:scale-105 active:scale-95"
+          >
+            ซื้อบน Shopee
+          </a>
+          <Link
+            href="/#models"
             className="inline-flex h-12 cursor-pointer items-center rounded-full bg-black px-10 font-body text-[16px] font-semibold text-white no-underline transition-all hover:bg-gray-800"
           >
             เลือกชมสินค้า
-          </a>
-          <a
-            href="#compare"
-            className="inline-flex h-12 cursor-pointer items-center rounded-full border-2 border-gray-200 px-10 font-body text-[16px] font-semibold text-[#1d1d1f] no-underline transition-all hover:bg-gray-50"
-          >
-            เปรียบเทียบรุ่น
-          </a>
+          </Link>
         </div>
       </div>
     </section>

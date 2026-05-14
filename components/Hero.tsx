@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { safeImageSrc } from "@/app/lib/safety";
+import { socialLinks } from "@/app/data";
 
 const trustBadges = [
   "จัดส่งฟรีทั่วไทย",
@@ -17,9 +18,14 @@ export default function Hero() {
       try {
         const saved = localStorage.getItem("voltcore_hero_image");
         const safe = safeImageSrc(saved);
-        if (safe) setHeroImage(safe);
+        if (safe) {
+          setHeroImage(safe);
+        } else {
+          // Default fallback from the user's latest export
+          setHeroImage("https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png");
+        }
       } catch {
-        // localStorage unavailable — use default background
+        setHeroImage("https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png");
       }
     }
   }, []);
@@ -48,23 +54,6 @@ export default function Hero() {
         <p className="mx-auto mb-10 max-w-[520px] font-body text-[17px] leading-[26px] text-white/60 md:text-[20px] md:leading-[30px]">
           สามโมเดล หนึ่งครอบครัว พลังงานสะอาดจาก LiFePO₄ ที่สร้างมาเพื่อทุกที่ที่คุณไป
         </p>
-
-        {/* CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#models"
-            className="inline-flex h-12 cursor-pointer items-center rounded-full bg-white px-9 font-body text-[16px] font-semibold text-[#1d1d1f] no-underline transition-all hover:scale-105 active:scale-95"
-          >
-            เลือกชมโมเดล
-          </a>
-          <a
-            href="#"
-            rel="noopener noreferrer nofollow"
-            className="inline-flex h-12 cursor-pointer items-center rounded-full border-2 border-white/35 px-9 font-body text-[16px] font-semibold text-white no-underline backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/10 active:scale-95"
-          >
-            คุยผ่าน LINE
-          </a>
-        </div>
 
         {/* Trust badges */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, notFound } from "next/navigation";
 import Link from "next/link";
-import { ProductModel, initialModels } from "@/app/data";
+import { ProductModel, initialModels, socialLinks } from "@/app/data";
 import { safeJsonParse, safeImageSrc } from "@/app/lib/safety";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -79,6 +79,8 @@ export default function ProductPage() {
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [lineUrl, setLineUrl] = useState(socialLinks.line);
+  const [shopeeUrl, setShopeeUrl] = useState(socialLinks.shopee);
 
   const ctaZoneRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +91,10 @@ export default function ProductPage() {
       const saved = localStorage.getItem("voltcore_models");
       const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
       if (Array.isArray(parsed) && parsed.length > 0) models = parsed;
+      const savedLine = localStorage.getItem("voltcore_line_url");
+      if (savedLine) setLineUrl(savedLine);
+      const savedShopee = localStorage.getItem("voltcore_shopee_url");
+      if (savedShopee) setShopeeUrl(savedShopee);
     } catch { /* localStorage unavailable */ }
     const found = models.find((m) => m.id === id);
     if (found) {
@@ -274,7 +280,8 @@ export default function ProductPage() {
               {/* Channel CTAs */}
               <div className="grid grid-cols-2 gap-3">
                 <a
-                  href="#"
+                  href={product.shopeeUrl || shopeeUrl}
+                  target="_blank"
                   rel="noopener noreferrer nofollow"
                   aria-label={`ซื้อ ${product.name} บน Shopee`}
                   className="flex h-12 items-center justify-center rounded-full bg-[#ee4d2d] font-body text-[15px] font-semibold text-white no-underline transition-opacity hover:opacity-90"
@@ -282,7 +289,8 @@ export default function ProductPage() {
                   Shopee
                 </a>
                 <a
-                  href="#"
+                  href={product.lineUrl || lineUrl}
+                  target="_blank"
                   rel="noopener noreferrer nofollow"
                   aria-label={`สอบถาม ${product.name} ผ่าน LINE`}
                   className="flex h-12 items-center justify-center rounded-full bg-[#06C755] font-body text-[15px] font-semibold text-white no-underline transition-opacity hover:opacity-90"
@@ -305,20 +313,60 @@ export default function ProductPage() {
             </div>
 
             {/* Specs table */}
-            {product.specs.length > 0 && (
+            {((product.techSpecs?.length ?? 0) > 0 || product.specs.length > 0) && (
               <div className="mt-10 border-t border-gray-100 pt-10">
                 <h2 className="mb-5 font-display text-lg font-bold">รายละเอียดทางเทคนิค</h2>
-                <table className="w-full overflow-hidden rounded-2xl text-sm">
-                  <caption className="sr-only">ข้อมูลจำเพาะของ {product.name}</caption>
-                  <tbody>
-                    {product.specs.map((s, i) => (
-                      <tr key={s.label} className={i % 2 === 0 ? "bg-[#f5f5f7]" : "bg-white"}>
-                        <th scope="row" className="w-2/5 px-5 py-3.5 text-left text-xs font-bold uppercase tracking-widest text-gray-400">{s.label}</th>
-                        <td className="px-5 py-3.5 font-semibold text-[#1d1d1f]">{s.value}</td>
-                      </tr>
+                
+                {product.techSpecs && product.techSpecs.length > 0 ? (
+                  <div className="space-y-8">
+                    {product.techSpecs.map((section) => (
+                      <div key={section.title} className="space-y-3">
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#1a432a]">
+                          {section.title}
+                        </h3>
+                        <table className="w-full overflow-hidden rounded-2xl text-sm border border-gray-50">
+                          <tbody>
+                            {section.items.map((s, i) => (
+                              <tr key={s.label} className={i % 2 === 0 ? "bg-[#f5f5f7]" : "bg-white"}>
+                                <th scope="row" className="w-2/5 px-5 py-3 text-left text-[11px] font-bold uppercase tracking-widest text-gray-400">{s.label}</th>
+                                <td className="px-5 py-3 font-semibold text-[#1d1d1f]">{s.value}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     ))}
-                  </tbody>
-                </table>
+                  </div>
+                ) : (
+                  <table className="w-full overflow-hidden rounded-2xl text-sm">
+                    <caption className="sr-only">ข้อมูลจำเพาะของ {product.name}</caption>
+                    <tbody>
+                      {product.specs.map((s, i) => (
+                        <tr key={s.label} className={i % 2 === 0 ? "bg-[#f5f5f7]" : "bg-white"}>
+                          <th scope="row" className="w-2/5 px-5 py-3.5 text-left text-xs font-bold uppercase tracking-widest text-gray-400">{s.label}</th>
+                          <td className="px-5 py-3.5 font-semibold text-[#1d1d1f]">{s.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+
+                {/* Usage Notes */}
+                {product.usageNotes && product.usageNotes.length > 0 && (
+                  <div className="mt-8 rounded-2xl bg-[#1a432a]/5 p-6 border border-[#1a432a]/10">
+                    <h3 className="mb-4 text-sm font-bold text-[#1a432a]">ข้อแนะนำในการใช้งาน</h3>
+                    <ul className="space-y-3">
+                      {product.usageNotes.map((note, i) => (
+                        <li key={i} className="flex gap-3 text-sm leading-relaxed text-[#1d1d1f]">
+                          <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#1a432a] text-[10px] text-white">
+                            {i + 1}
+                          </span>
+                          {note}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -426,7 +474,8 @@ export default function ProductPage() {
               ด้วยเทคโนโลยี LiFePO₄ ที่ปลอดภัยเป็นพิเศษและตัวเครื่องเกรดอากาศยานที่ทนทาน {product.name} ถูกออกแบบมาเพื่อเป็นพันธมิตรที่เชื่อถือได้มากที่สุดของคุณ ไม่ว่าจะอยู่นอกสถานที่หรือเผชิญกับเหตุการณ์ไฟดับที่บ้าน
             </p>
             <a
-              href="#"
+              href={product.lineUrl || lineUrl}
+              target="_blank"
               rel="noopener noreferrer nofollow"
               className="inline-flex h-13 items-center rounded-full bg-[#06C755] px-8 font-body text-[16px] font-semibold text-white no-underline transition-all hover:scale-105 active:scale-95"
             >
@@ -466,14 +515,16 @@ export default function ProductPage() {
           </div>
           <div className="flex flex-shrink-0 items-center gap-3">
             <a
-              href="#"
+              href={product.shopeeUrl || shopeeUrl}
+              target="_blank"
               rel="noopener noreferrer nofollow"
               className="hidden h-10 items-center rounded-full bg-[#ee4d2d] px-5 font-body text-[14px] font-semibold text-white no-underline transition-opacity hover:opacity-90 sm:flex"
             >
               Shopee
             </a>
             <a
-              href="#"
+              href={product.lineUrl || lineUrl}
+              target="_blank"
               rel="noopener noreferrer nofollow"
               className="flex h-10 items-center rounded-full bg-[#06C755] px-6 font-body text-[14px] font-semibold text-white no-underline transition-all hover:scale-105 active:scale-95"
             >

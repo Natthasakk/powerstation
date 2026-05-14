@@ -12,86 +12,460 @@ export type SeoData = {
   canonical?: string;
 };
 
+export type TechSpecSection = {
+  title: string;
+  items: ModelSpec[];
+};
+
 export type ProductModel = {
   id: string;
   name: string;
   tagline: string;
   price: string;
   accent: string;
-  featured: boolean;
+  featured?: boolean;
   imageUrl: string;
-  images?: string[];
+  shopeeUrl?: string;
+  lineUrl?: string;
   specs: ModelSpec[];
+  techSpecs?: TechSpecSection[];
+  usageNotes?: string[];
+  ctaLabel?: string;
+  ctaBg?: string;
+  ctaText?: string;
+  ctaBorder?: string;
+  ctaHover?: string;
+  images?: string[];
   seo?: SeoData;
-  ctaLabel: string;
-  ctaBg: string;
-  ctaText: string;
-  ctaBorder: string;
-  ctaHover: string;
+};
+
+export const socialLinks = {
+  line: "https://lin.ee/P5C6Pez",
+  shopee: "https://s.shopee.co.th/9021ZWlkjA?share_channel_code=6",
 };
 
 export const initialModels: ProductModel[] = [
   {
     id: "lite-1000",
-    name: "VoltCore Lite 1000",
+    name: "PB-AR07Pro",
     tagline: "เหมาะสำหรับการเดินทางช่วงสุดสัปดาห์และสำรองไฟมวลเบา",
-    price: "฿29,900",
+    price: "฿19,900",
     accent: "#34C759",
     featured: false,
-    imageUrl: "https://images.unsplash.com/photo-1690192097330-f2189d2d4834?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://webstatitic.blob.core.windows.net/picture/07.jpg",
+    shopeeUrl: "https://s.shopee.co.th/9021ZWlkjA?share_channel_code=6",
+    lineUrl: "https://lin.ee/P5C6Pez",
     specs: [
-      { label: "ความจุ",    value: "1,024 Wh" },
-      { label: "กำลังขับ AC",   value: "1,000W" },
-      { label: "ชาร์จเร็ว", value: "1.5 ชม." },
-      { label: "โซล่าร์อินพุต", value: "400W" },
-      { label: "น้ำหนัก",      value: "11.2 กก." },
+      {
+        label: "ความจุ",
+        value: "299Wh"
+      },
+      {
+        label: "กำลังขับ AC",
+        value: "600W"
+      },
+      {
+        label: "ชาร์จเร็ว",
+        value: "1 ชม."
+      },
+      {
+        label: "น้ำหนัก",
+        value: "5.6 กก."
+      }
+    ],
+    techSpecs: [
+      {
+        title: "ข้อมูลทั่วไป",
+        items: [
+          {
+            label: "ชื่อผลิตภัณฑ์ / รุ่น",
+            value: "PB-AR07Pro (รหัสสินค้า: 410005)"
+          },
+          {
+            label: "ประเภทแบตเตอรี่",
+            value: "ลิเธียมไอออนฟอสเฟต (LiFePO4)"
+          },
+          {
+            label: "ความจุแบตเตอรี่",
+            value: "299Wh"
+          },
+          {
+            label: "น้ำหนักตัวเครื่อง",
+            value: "5.6 กก."
+          },
+          {
+            label: "ขนาดตัวเครื่อง",
+            value: "285 มม. x 195 มม. x 190 มม."
+          },
+          {
+            label: "ฟังก์ชันพิเศษ",
+            value: "ระบบ UPS (10ms), รองรับ Pass-through"
+          },
+          {
+            label: "ระยะเวลาชาร์จเต็ม",
+            value: "ประมาณ 1 ชั่วโมง"
+          }
+        ]
+      },
+      {
+        title: "Input",
+        items: [
+          {
+            label: "ไฟบ้าน (AC Input)",
+            value: "100V 50Hz (สูงสุด 4A)"
+          },
+          {
+            label: "โซล่าเซลล์ (Solar)",
+            value: "12～60V 8.8A (สูงสุด 220W)"
+          },
+          {
+            label: "ชาร์จผ่านรถยนต์",
+            value: "รองรับทั้ง 12V และ 24V"
+          }
+        ]
+      },
+      {
+        title: "Output",
+        items: [
+          {
+            label: "ปลั๊กไฟบ้าน (AC)",
+            value: "2 ช่อง: 600W (Peak 1,200W)"
+          },
+          {
+            label: "USB-A",
+            value: "รวมสูงสุด 36W (QC 3.0)"
+          },
+          {
+            label: "USB-C (2 ช่อง)",
+            value: "PD รวมสูงสุด 200W"
+          },
+          {
+            label: "ช่องจุดบุหรี่",
+            value: "12V/10A (สูงสุด 120W)"
+          },
+          {
+            label: "ชาร์จไร้สาย",
+            value: "สูงสุด 15W"
+          }
+        ]
+      },
+      {
+        title: "สภาพแวดล้อมและการป้องกัน",
+        items: [
+          {
+            label: "ระบบความปลอดภัย",
+            value: "ป้องกันอุณหภูมิ, แรงดันเกิน, Short Circuit"
+          },
+          {
+            label: "อุณหภูมิขณะชาร์จ",
+            value: "0℃ ถึง +40℃"
+          },
+          {
+            label: "อุณหภูมิขณะใช้งาน",
+            value: "-10℃ ถึง +40℃"
+          },
+          {
+            label: "ความชื้นที่รองรับ",
+            value: "10% ถึง 90%Rh"
+          }
+        ]
+      }
+    ],
+    usageNotes: [
+      "การดูแลรักษา: หากเก็บไว้เป็นเวลานาน ควรนำมาชาร์จและคลายประจุทุกๆ 3 เดือน",
+      "ประสิทธิภาพ: แนะนำให้ใช้งานในที่อุณหภูมิ 0℃ ขึ้นไปเพื่อประสิทธิภาพสูงสุด",
+      "การใช้งานกับเครื่องจักร: สามารถใช้กับเครื่องเชื่อมท่อ EF หรือเครื่องต๊าปเกลียวบางรุ่นได้"
     ],
     ctaLabel: "สั่งซื้อ Lite — ฿29,900",
     ctaBg: "transparent",
     ctaText: "#34C759",
     ctaBorder: "#34C759",
     ctaHover: "",
+    images: [
+      "https://webstatitic.blob.core.windows.net/picture/07.jpg",
+      "https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png",
+      "https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_x81rt3x81rt3x81r.png"
+    ]
   },
   {
     id: "pro-2000",
-    name: "VoltCore Pro 2000",
+    name: "PB-AR20Pro",
     tagline: "ที่สุดของความอเนกประสงค์ สำหรับทั้งบ้านและการผจญภัย",
-    price: "฿59,900",
+    price: "฿29,900",
     accent: "#0071E3",
     featured: true,
-    imageUrl: "https://images.unsplash.com/photo-1680513904698-1e4719262100?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://webstatitic.blob.core.windows.net/picture/20.jpg",
+    shopeeUrl: "https://s.shopee.co.th/9021ZWlkjA?share_channel_code=6",
+    lineUrl: "https://lin.ee/P5C6Pez",
     specs: [
-      { label: "ความจุ",    value: "2,048 Wh" },
-      { label: "กำลังขับ AC",   value: "2,000W" },
-      { label: "ชาร์จเร็ว", value: "1.8 ชม." },
-      { label: "โซล่าร์อินพุต", value: "800W" },
-      { label: "น้ำหนัก",      value: "18.2 กก." },
+      {
+        label: "ความจุ",
+        value: "1,152Wh"
+      },
+      {
+        label: "กำลังขับ AC",
+        value: "1,800W"
+      },
+      {
+        label: "ชาร์จเร็ว",
+        value: "1.5 ชม."
+      },
+      {
+        label: "น้ำหนัก",
+        value: "16.7 กก."
+      }
+    ],
+    techSpecs: [
+      {
+        title: "ข้อมูลทั่วไป",
+        items: [
+          {
+            label: "ชื่อผลิตภัณฑ์ / รุ่น",
+            value: "PB-AR20Pro (รหัสสินค้า: 410015)"
+          },
+          {
+            label: "ประเภทแบตเตอรี่",
+            value: "ลิเธียมไอออนฟอสเฟต (LiFePO4)"
+          },
+          {
+            label: "ความจุแบตเตอรี่",
+            value: "1,152Wh"
+          },
+          {
+            label: "น้ำหนักตัวเครื่อง",
+            value: "16.7 กก."
+          },
+          {
+            label: "ขนาดตัวเครื่อง",
+            value: "413 มม. x 312 มม. x 265 มม."
+          },
+          {
+            label: "ฟังก์ชันพิเศษ",
+            value: "ระบบ UPS (15ms), รองรับ Pass-through"
+          },
+          {
+            label: "ระยะเวลาชาร์จเต็ม",
+            value: "ประมาณ 1.5 ชั่วโมง"
+          }
+        ]
+      },
+      {
+        title: "Input",
+        items: [
+          {
+            label: "ไฟบ้าน (AC Input)",
+            value: "100～120V 50/60Hz (สูงสุด 15A)"
+          },
+          {
+            label: "โซล่าเซลล์ (Solar)",
+            value: "12～95V 13A (สูงสุด 650W)"
+          },
+          {
+            label: "ชาร์จผ่านรถยนต์",
+            value: "รองรับทั้ง 12V และ 24V"
+          }
+        ]
+      },
+      {
+        title: "Output",
+        items: [
+          {
+            label: "ปลั๊กไฟบ้าน (AC)",
+            value: "4 ช่อง: 1,800W (Peak 3,000W)"
+          },
+          {
+            label: "USB-A (ชาร์จเร็ว)",
+            value: "2 ช่อง: รวมสูงสุด 36W"
+          },
+          {
+            label: "USB-C",
+            value: "PD รวมสูงสุด 200W"
+          },
+          {
+            label: "ช่องจุดบุหรี่",
+            value: "12V/10A (สูงสุด 120W)"
+          },
+          {
+            label: "ชาร์จไร้สาย",
+            value: "สูงสุด 30W"
+          }
+        ]
+      },
+      {
+        title: "สภาพแวดล้อมและการป้องกัน",
+        items: [
+          {
+            label: "ระบบความปลอดภัย",
+            value: "ป้องกันอุณหภูมิ, แรงดันเกิน, Overload, Short Circuit"
+          },
+          {
+            label: "อุณหภูมิขณะชาร์จ",
+            value: "0℃ ถึง +40℃"
+          },
+          {
+            label: "อุณหภูมิขณะใช้งาน",
+            value: "-10℃ ถึง +40℃"
+          },
+          {
+            label: "อุณหภูมิการเก็บรักษา",
+            value: "-20℃ ถึง +40℃"
+          }
+        ]
+      }
+    ],
+    usageNotes: [
+      "การบำรุงรักษา: ควรทำการตรวจสอบการชาร์จและคลายประจุทุกๆ 3 เดือน เพื่อยืดอายุการใช้งานแบตเตอรี่",
+      "อุณหภูมิ: ประสิทธิภาพการจ่ายไฟจะดีที่สุดเมื่อใช้งานในอุณหภูมิ 0℃ ขึ้นไป",
+      "ความปลอดภัย: ตัวเครื่องมีระบบป้องกันความปลอดภัยครบวงจร เหมาะสำหรับงานช่างและการสำรองไฟในไซต์งาน"
     ],
     ctaLabel: "สั่งซื้อ Pro — ฿59,900",
     ctaBg: "#0071E3",
     ctaText: "#fff",
     ctaBorder: "#0071E3",
     ctaHover: "",
+    images: [
+      "https://webstatitic.blob.core.windows.net/picture/20.jpg"
+    ]
   },
   {
     id: "max-4000",
-    name: "VoltCore Max 4000",
+    name: "PB-AR26Pro",
     tagline: "สำรองไฟทั้งบ้านและไซต์งานหนักระดับมืออาชีพ",
-    price: "฿109,000",
+    price: "฿44,900",
     accent: "#FF9F0A",
     featured: false,
-    imageUrl: "https://images.unsplash.com/photo-1697205244199-566087968504?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://webstatitic.blob.core.windows.net/picture/26.jpg",
+    shopeeUrl: "https://s.shopee.co.th/9021ZWlkjA?share_channel_code=6",
+    lineUrl: "https://lin.ee/P5C6Pez",
     specs: [
-      { label: "ความจุ",    value: "4,096 Wh" },
-      { label: "กำลังขับ AC",   value: "4,000W" },
-      { label: "ชาร์จเร็ว", value: "2.1 ชม." },
-      { label: "โซล่าร์อินพุต", value: "1,600W" },
-      { label: "น้ำหนัก",      value: "34.5 กก." },
+      {
+        label: "ความจุ",
+        value: "2,016Wh"
+      },
+      {
+        label: "กำลังขับ AC",
+        value: "2,500W"
+      },
+      {
+        label: "ชาร์จเร็ว",
+        value: "3 ชม."
+      },
+      {
+        label: "น้ำหนัก",
+        value: "27 กก."
+      }
+    ],
+    techSpecs: [
+      {
+        title: "ข้อมูลทั่วไป",
+        items: [
+          {
+            label: "ชื่อผลิตภัณฑ์ / รุ่น",
+            value: "PB-AR26Pro (รหัสสินค้า: 410025)"
+          },
+          {
+            label: "ประเภทแบตเตอรี่",
+            value: "ลิเธียมไอออนฟอสเฟต (LiFePO4)"
+          },
+          {
+            label: "ความจุแบตเตอรี่",
+            value: "2,016Wh"
+          },
+          {
+            label: "น้ำหนักตัวเครื่อง",
+            value: "27 กก."
+          },
+          {
+            label: "ขนาดตัวเครื่อง",
+            value: "450 มม. x 360 มม. x 346 มม."
+          },
+          {
+            label: "ฟังก์ชันพิเศษ",
+            value: "ระบบ UPS (15ms), รองรับ Pass-through"
+          },
+          {
+            label: "ระยะเวลาชาร์จเต็ม",
+            value: "ประมาณ 3 ชั่วโมง"
+          }
+        ]
+      },
+      {
+        title: "Input",
+        items: [
+          {
+            label: "ไฟบ้าน (AC Input)",
+            value: "100～150V 50/60Hz (สูงสุด 15A)"
+          },
+          {
+            label: "โซล่าเซลล์ (Solar)",
+            value: "12～150V 13A (สูงสุด 1,000W)"
+          },
+          {
+            label: "ชาร์จผ่านรถยนต์",
+            value: "รองรับทั้ง 12V และ 24V"
+          }
+        ]
+      },
+      {
+        title: "Output",
+        items: [
+          {
+            label: "ปลั๊กไฟบ้าน (AC)",
+            value: "4 ช่อง: 2,500W (Peak 4,000W)"
+          },
+          {
+            label: "USB-A (ชาร์จเร็ว)",
+            value: "2 ช่อง: รวมสูงสุด 36W"
+          },
+          {
+            label: "USB-C",
+            value: "PD รวมสูงสุด 200W"
+          },
+          {
+            label: "ช่องจุดบุหรี่",
+            value: "12V/10A (สูงสุด 120W)"
+          },
+          {
+            label: "DC5525",
+            value: "2 ช่อง: 12V/5A"
+          }
+        ]
+      },
+      {
+        title: "สภาพแวดล้อมและการป้องกัน",
+        items: [
+          {
+            label: "ระบบความปลอดภัย",
+            value: "ป้องกันอุณหภูมิ, แรงดันเกิน, Overload, Short Circuit"
+          },
+          {
+            label: "อุณหภูมิขณะชาร์จ",
+            value: "0℃ ถึง +40℃"
+          },
+          {
+            label: "อุณหภูมิขณะใช้งาน",
+            value: "-10℃ ถึง +40℃"
+          },
+          {
+            label: "ความชื้นที่รองรับ",
+            value: "10% ถึง 90%Rh"
+          }
+        ]
+      }
+    ],
+    usageNotes: [
+      "การเก็บรักษา: หากไม่ได้ใช้งานนาน ควรนำออกมาทดสอบชาร์จและคายประจุอย่างน้อยทุกๆ 3 เดือน",
+      "อุณหภูมิ: ระบบป้องกันจะทำงานตามอุณหภูมิภายในตัวเครื่อง ควรหลีกเลี่ยงที่ร้อนหรือเย็นจัด",
+      "การใช้งานในที่เย็น: สามารถใช้งานได้ถึง -10℃ แต่แนะนำที่ 0℃ ขึ้นไปเพื่อประสิทธิภาพสูงสุด",
+      "คำแนะนำ: การรักษาระดับไฟที่ 20% - 80% ระหว่างการเก็บรักษาจะช่วยยืดอายุแบตเตอรี่ได้ดีที่สุด"
     ],
     ctaLabel: "สั่งซื้อ Max — ฿109,000",
     ctaBg: "transparent",
     ctaText: "#FF9F0A",
     ctaBorder: "#FF9F0A",
     ctaHover: "",
-  },
+    images: [
+      "https://webstatitic.blob.core.windows.net/picture/26.jpg"
+    ]
+  }
 ];
