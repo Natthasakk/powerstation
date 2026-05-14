@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "VoltCore | พาวเวอร์สเตชั่นพกพาระดับพรีเมียม",
+    default: "VoltCore | พาวเวอร์สเตชั่นพกพา LiFePO₄ สำรองไฟบ้านพรีเมียม",
     template: "%s | VoltCore",
   },
   description:
@@ -31,7 +31,10 @@ export const metadata: Metadata = {
   creator: "VoltCore",
   publisher: "VoltCore",
   formatDetection: { email: false, address: false, telephone: false },
-  alternates: { canonical: BASE_URL },
+  alternates: {
+    canonical: BASE_URL,
+    languages: { "th-TH": BASE_URL },
+  },
   robots: {
     index: true,
     follow: true,

@@ -34,7 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     keywords: seo.keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: { "th-TH": url },
+    },
     openGraph: {
       title: seo.ogTitle || title,
       description: seo.ogDescription || description,

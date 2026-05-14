@@ -191,7 +191,7 @@ export const initialModels: ProductModel[] = [
       description: "พาวเวอร์สเตชั่น PB-AR07Pro 600W/299Wh แบต LiFePO4 ชาร์จไวใน 1 ชม. รองรับ UPS และโซล่าเซลล์ น้ำหนักเบา พกพาสะดวก เหมาะสำหรับสายแคมป์ปิ้งและใช้งานทั่วไป",
       keywords: "Portable Power Station, พาวเวอร์สเตชั่น, พาวเวอร์สเตชั่นพกพา, แบตเตอรี่สำรองพกพา, เครื่องสำรองไฟพกพา, เครื่องปั่นไฟไร้เสียง, LiFePO4",
       ogDescription: "หมดกังวลเรื่องแบตหมดกลางป่า! PB-AR07Pro 600W/299Wh น้ำหนักเบา แบต LiFePO4 สุดทน ชาร์จไวทันใจใน 1 ชั่วโมง เพื่อนแท้ที่สาย Outdoor ต้องมี!",
-      canonical: "https://powerstation-beta.vercel.app/product/PB-AR07Pro",
+      canonical: "https://voltcore.tech/product/PB-AR07Pro",
     },
   },
   {
@@ -339,7 +339,7 @@ export const initialModels: ProductModel[] = [
       keywords: "สายสำรองไฟบ้าน: สำรองไฟบ้านเวลาไฟดับ, เครื่องสำรองไฟ CPAP, พาวเวอร์สเตชั่นใช้ในบ้าน",
       ogTitle: "ไฟดับก็ไม่หวั่น! PB-AR20Pro พาวเวอร์สเตชั่น 1800W สำรองไฟบ้านและงานช่าง",
       ogDescription: "พลังงานสำรองระดับมืออาชีพ ความจุ 1152Wh พร้อมระบบ UPS สลับไฟไวใน 15ms รองรับเครื่องใช้ไฟฟ้าหลากหลาย ชาร์จไว ปลอดภัย ทนทาน ใช้งานได้ยาวนาน",
-      canonical: "https://powerstation-beta.vercel.app/product/PB-AR20Pro",
+      canonical: "https://voltcore.tech/product/PB-AR20Pro",
     },
   },
   {
@@ -488,7 +488,7 @@ export const initialModels: ProductModel[] = [
       keywords: "สายงานช่าง/นอกสถานที่: พลังงานสำรองงานช่าง, พาวเวอร์สเตชั่นใช้กับเครื่องต๊าป, แหล่งจ่ายไฟนอกสถานที่",
       ogTitle: "⚡ แรงสุดในรุ่น! PB-AR26Pro พาวเวอร์สเตชั่น 2500W จุใจ 2016Wh",
       ogDescription: "จัดเต็มพลังงานสะอาดสำหรับงานหนักและไซต์งาน! รองรับโซล่าเซลล์สูงสุด 1000W จ่ายไฟแรง 2500W ชาร์จโน้ตบุ๊ก เครื่องมือช่าง หรือสำรองไฟบ้านได้แบบจุใจ",
-      canonical: "https://powerstation-beta.vercel.app/product/PB-AR26Pro",
+      canonical: "https://voltcore.tech/product/PB-AR26Pro",
     },
   }
 ];

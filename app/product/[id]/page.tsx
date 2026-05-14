@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical,
+      languages: { "th-TH": canonical },
     },
     openGraph: {
       title,
