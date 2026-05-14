@@ -48,7 +48,7 @@ export const initialModels: ProductModel[] = [
   {
     id: "lite-1000",
     name: "PB-AR07Pro",
-    tagline: "เหมาะสำหรับการเดินทางช่วงสุดสัปดาห์และสำรองไฟมวลเบา",
+    tagline: "ไฟดับไม่ต้องกลัว พาวเวอร์สเตชั่นสำรองไฟบ้าน ใช้งานง่าย ปลอดภัยกว่าปั่นไฟ",
     price: "฿19,900",
     accent: "#34C759",
     featured: false,
@@ -185,7 +185,14 @@ export const initialModels: ProductModel[] = [
       "https://webstatitic.blob.core.windows.net/picture/07.jpg",
       "https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png",
       "https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_x81rt3x81rt3x81r.png"
-    ]
+    ],
+    seo: {
+      title: "🔋 พกไฟไปได้ทุกที่! PB-AR07Pro พาวเวอร์สเตชั่นสายแคมป์ ชาร์จไว 1 ชม.",
+      description: "พาวเวอร์สเตชั่น PB-AR07Pro 600W/299Wh แบต LiFePO4 ชาร์จไวใน 1 ชม. รองรับ UPS และโซล่าเซลล์ น้ำหนักเบา พกพาสะดวก เหมาะสำหรับสายแคมป์ปิ้งและใช้งานทั่วไป",
+      keywords: "Portable Power Station, พาวเวอร์สเตชั่น, พาวเวอร์สเตชั่นพกพา, แบตเตอรี่สำรองพกพา, เครื่องสำรองไฟพกพา, เครื่องปั่นไฟไร้เสียง, LiFePO4",
+      ogDescription: "หมดกังวลเรื่องแบตหมดกลางป่า! PB-AR07Pro 600W/299Wh น้ำหนักเบา แบต LiFePO4 สุดทน ชาร์จไวทันใจใน 1 ชั่วโมง เพื่อนแท้ที่สาย Outdoor ต้องมี!",
+      canonical: "https://powerstation-beta.vercel.app/product/lite-1000",
+    },
   },
   {
     id: "pro-2000",
@@ -325,7 +332,15 @@ export const initialModels: ProductModel[] = [
     ctaHover: "",
     images: [
       "https://webstatitic.blob.core.windows.net/picture/20.jpg"
-    ]
+    ],
+    seo: {
+      title: "พาวเวอร์สเตชั่น 1800W PB-AR20Pro ความจุ 1152Wh สำรองไฟบ้านและงานช่าง",
+      description: "Portable Power Station PB-AR20Pro กำลังไฟ 1800W ความจุ 1152Wh จ่ายไฟนิ่งด้วยระบบ UPS รองรับงานช่างและเครื่องใช้ไฟฟ้าในบ้าน ชาร์จเต็มไวเพียง 1.5 ชม. ทนทานปลอดภัย",
+      keywords: "สายสำรองไฟบ้าน: สำรองไฟบ้านเวลาไฟดับ, เครื่องสำรองไฟ CPAP, พาวเวอร์สเตชั่นใช้ในบ้าน",
+      ogTitle: "ไฟดับก็ไม่หวั่น! PB-AR20Pro พาวเวอร์สเตชั่น 1800W สำรองไฟบ้านและงานช่าง",
+      ogDescription: "พลังงานสำรองระดับมืออาชีพ ความจุ 1152Wh พร้อมระบบ UPS สลับไฟไวใน 15ms รองรับเครื่องใช้ไฟฟ้าหลากหลาย ชาร์จไว ปลอดภัย ทนทาน ใช้งานได้ยาวนาน",
+      canonical: "https://powerstation-beta.vercel.app/product/pro-2000",
+    },
   },
   {
     id: "max-4000",
@@ -466,6 +481,14 @@ export const initialModels: ProductModel[] = [
     ctaHover: "",
     images: [
       "https://webstatitic.blob.core.windows.net/picture/26.jpg"
-    ]
+    ],
+    seo: {
+      title: "PB-AR26Pro Portable Power Station 2500W/2016Wh พลังงานสำรองระดับโปร",
+      description: "รุ่นท็อป PB-AR26Pro พาวเวอร์สเตชั่น 2500W ความจุสูง 2016Wh แบตอึดจุใจ รองรับโซล่าเซลล์ 1000W จ่ายไฟแรงสำหรับเครื่องจักรและอุปกรณ์มืออาชีพ พร้อมระบบความปลอดภัยครบชุด",
+      keywords: "สายงานช่าง/นอกสถานที่: พลังงานสำรองงานช่าง, พาวเวอร์สเตชั่นใช้กับเครื่องต๊าป, แหล่งจ่ายไฟนอกสถานที่",
+      ogTitle: "⚡ แรงสุดในรุ่น! PB-AR26Pro พาวเวอร์สเตชั่น 2500W จุใจ 2016Wh",
+      ogDescription: "จัดเต็มพลังงานสะอาดสำหรับงานหนักและไซต์งาน! รองรับโซล่าเซลล์สูงสุด 1000W จ่ายไฟแรง 2500W ชาร์จโน้ตบุ๊ก เครื่องมือช่าง หรือสำรองไฟบ้านได้แบบจุใจ",
+      canonical: "https://powerstation-beta.vercel.app/product/max-4000",
+    },
   }
 ];
