@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = product.seo?.title || `${product.name} | พาวเวอร์สเตชั่น VoltCore`;
   const description = product.seo?.description || product.tagline;
-  const canonical = product.seo?.canonical || `https://voltcore.tech/product/${id}`;
+  const canonical = product.seo?.canonical || `https://powerstation-beta.vercel.app/product/${id}`;
 
   return {
     title,
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `https://voltcore.tech/product/${id}`,
+      url: `https://powerstation-beta.vercel.app/product/${id}`,
       images: [
         {
           url: product.imageUrl,

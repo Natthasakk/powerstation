@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { initialModels } from "@/app/data";
 import { isSafeImageUrl } from "@/app/lib/safety";
 
-const BASE_URL = "https://voltcore.tech";
+const BASE_URL = "https://powerstation-beta.vercel.app";
 
 type Props = {
   params: Promise<{ id: string }>;

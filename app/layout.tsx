@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const BASE_URL = "https://voltcore.tech";
+const BASE_URL = "https://powerstation-beta.vercel.app";
 
 export const viewport: Viewport = {
   width: "device-width",

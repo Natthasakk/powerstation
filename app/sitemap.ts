@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { initialModels } from "./data";
 
-const BASE_URL = "https://voltcore.tech";
+const BASE_URL = "https://powerstation-beta.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
