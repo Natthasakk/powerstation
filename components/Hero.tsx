@@ -10,22 +10,20 @@ const trustBadges = [
   "UL / FCC / CE",
 ];
 
+const DEFAULT_HERO =
+  "https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png";
+
 export default function Hero() {
-  const [heroImage, setHeroImage] = useState<string>("");
+  const [heroImage, setHeroImage] = useState<string>(DEFAULT_HERO);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
         const saved = localStorage.getItem("voltcore_hero_image");
         const safe = safeImageSrc(saved);
-        if (safe) {
-          setHeroImage(safe);
-        } else {
-          // Default fallback from the user's latest export
-          setHeroImage("https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png");
-        }
+        if (safe) setHeroImage(safe);
       } catch {
-        setHeroImage("https://webstatitic.blob.core.windows.net/picture/Gemini_Generated_Image_3ws1nu3ws1nu3ws1.png");
+        // keep the default
       }
     }
   }, []);

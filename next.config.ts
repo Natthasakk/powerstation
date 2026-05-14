@@ -19,6 +19,25 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   productionBrowserSourceMaps: false,
+  async redirects() {
+    return [
+      {
+        source: "/index",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/index.html",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/index.php",
+        destination: "/",
+        statusCode: 301,
+      },
+    ];
+  },
   async headers() {
     return [
       {

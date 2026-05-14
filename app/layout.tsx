@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   creator: "VoltCore",
   publisher: "VoltCore",
   formatDetection: { email: false, address: false, telephone: false },
-  alternates: { canonical: "/" },
+  alternates: { canonical: BASE_URL },
   robots: {
     index: true,
     follow: true,
@@ -69,6 +69,33 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "VoltCore",
+  url: BASE_URL,
+  logo: `${BASE_URL}/og-image.jpg`,
+  sameAs: [
+    "https://lin.ee/P5C6Pez",
+    "https://s.shopee.co.th/9021ZWlkjA",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    availableLanguage: "Thai",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "VoltCore",
+  url: BASE_URL,
+  description:
+    "พาวเวอร์สเตชั่น LiFePO₄ ประสิทธิภาพสูงสำหรับการสำรองไฟที่บ้าน แคมป์ปิ้ง และงานมืออาชีพ ชาร์จเร็ว ปลอดภัย และทนทาน",
+  inLanguage: "th-TH",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -76,6 +103,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="th">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );
