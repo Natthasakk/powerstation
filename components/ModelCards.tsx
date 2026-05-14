@@ -14,7 +14,15 @@ export default function ModelCards() {
       try {
         const saved = localStorage.getItem("voltcore_models");
         const parsed = safeJsonParse<ProductModel[] | null>(saved, null);
-        if (Array.isArray(parsed) && parsed.length > 0) setModels(parsed);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const validIds = new Set(initialModels.map((m) => m.id));
+          const isStale = parsed.some((m) => !validIds.has(m.id));
+          if (isStale) {
+            localStorage.removeItem("voltcore_models");
+          } else {
+            setModels(parsed);
+          }
+        }
         const savedLine = localStorage.getItem("voltcore_line_url");
         if (savedLine) setLineUrl(savedLine);
         const savedShopee = localStorage.getItem("voltcore_shopee_url");

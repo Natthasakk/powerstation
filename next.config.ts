@@ -22,6 +22,21 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/product/lite-1000",
+        destination: "/product/PB-AR07Pro",
+        statusCode: 301,
+      },
+      {
+        source: "/product/pro-2000",
+        destination: "/product/PB-AR20Pro",
+        statusCode: 301,
+      },
+      {
+        source: "/product/max-4000",
+        destination: "/product/PB-AR26Pro",
+        statusCode: 301,
+      },
+      {
         source: "/index",
         destination: "/",
         statusCode: 301,
